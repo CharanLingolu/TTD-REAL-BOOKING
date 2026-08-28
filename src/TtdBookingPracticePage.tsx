@@ -10,7 +10,7 @@ type Pilgrim = {
 };
 
 type GeneralDetails = {
-  // gothram: string;
+  gothram: string;
   email: string;
   city: string;
   state: string;
@@ -31,7 +31,7 @@ const initialPilgrims: Pilgrim[] = Array.from({ length: 6 }, () =>
 );
 
 const initialGeneralDetails: GeneralDetails = {
-  // gothram: "",
+  gothram: "",
   email: "",
   city: "",
   state: "",
@@ -190,6 +190,17 @@ export default function TtdBookingPracticePage() {
             <h2 id="general-details-heading" className="general-title">
               General Details
             </h2>
+
+            <TtdField label="Gothram">
+              <input
+                id="gothram"
+                name="general.gothram"
+                type="text"
+                autoComplete="off"
+                value={general.gothram}
+                onChange={(e) => updateGeneral("gothram", e.target.value)}
+              />
+            </TtdField>
 
             <TtdField label="Email Address" required>
               <input
