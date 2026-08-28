@@ -1,0 +1,898 @@
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+
+  --bg: #fff;
+  --border: #e5e4e7;
+
+  --code-bg: #f4f3ec;
+
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+
+  --social-bg: rgba(244, 243, 236, 0.5);
+
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+
+  color-scheme: light;
+
+  color: var(--text);
+  background: var(--bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+
+    --bg: #16171d;
+    --border: #2e303a;
+
+    --code-bg: #1f2028;
+
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+
+    --social-bg: rgba(47, 48, 58, 0.5);
+
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px,
+      rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+    color-scheme: dark;
+  }
+}
+
+
+/* =========================================================
+   ROOT CONTAINER
+   ========================================================= */
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  border-inline: 1px solid var(--border);
+
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+body {
+  margin: 0;
+
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--bg);
+  color: var(--text);
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2 {
+  font-family: var(--heading);
+
+  font-weight: 500;
+
+  color: var(--text-h);
+}
+
+
+h1 {
+  font-size: 56px;
+
+  letter-spacing: -1.68px;
+
+  margin: 32px 0;
+}
+
+
+h2 {
+  font-size: 24px;
+
+  line-height: 118%;
+
+  letter-spacing: -0.24px;
+
+  margin: 0 0 8px;
+}
+
+
+p {
+  margin: 0;
+}
+
+
+/* =========================================================
+   CODE
+   ========================================================= */
+
+code,
+.counter {
+  font-family: var(--mono);
+
+  display: inline-flex;
+
+  border-radius: 4px;
+
+  color: var(--text-h);
+}
+
+
+code {
+  font-size: 15px;
+
+  line-height: 135%;
+
+  padding: 4px 8px;
+
+  background: var(--code-bg);
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 40px 50px 60px;
+
+  flex: 1;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  margin-bottom: 35px;
+}
+
+
+.header h1 {
+  margin-bottom: 12px;
+}
+
+
+.header p {
+  max-width: 760px;
+
+  margin: 0 auto;
+
+  color: var(--text);
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   INSTRUCTIONS
+   ========================================================= */
+
+.instructions {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  max-width: 850px;
+
+  margin: 0 auto 30px;
+
+  padding: 18px 22px;
+
+  text-align: left;
+
+  border: 1px solid var(--accent-border);
+
+  border-radius: 12px;
+
+  background: var(--accent-bg);
+
+  box-sizing: border-box;
+}
+
+
+.instructions-icon {
+  font-size: 24px;
+
+  line-height: 1;
+
+  flex-shrink: 0;
+}
+
+
+.instructions-text {
+  font-size: 15px;
+
+  line-height: 1.55;
+
+  color: var(--text);
+}
+
+
+.instructions-text strong {
+  color: var(--text-h);
+}
+
+
+/* =========================================================
+   CHECKLIST
+   ========================================================= */
+
+.checklist {
+  width: 100%;
+
+  max-width: 850px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   CHECKBOX CARD
+   ========================================================= */
+
+.checkbox-card {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  width: 100%;
+
+  min-height: 105px;
+
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border);
+
+  border-radius: 14px;
+
+  background: var(--bg);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.checkbox-card:hover {
+  transform: translateY(-1px);
+
+  border-color: var(--accent-border);
+}
+
+
+/* =========================================================
+   CHECKED CARD
+   ========================================================= */
+
+.checkbox-card.checked {
+  border-color: var(--accent);
+
+  background: var(--accent-bg);
+}
+
+
+/* =========================================================
+   CHECKBOX CONTAINER
+   ========================================================= */
+
+.checkbox-container {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 28px;
+
+  height: 28px;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   REAL HTML CHECKBOX
+   =========================================================
+
+   Keep the actual input in the DOM.
+
+   This is important because your Tampermonkey
+   automation searches for:
+
+       input[type="checkbox"]
+
+   ========================================================= */
+
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+
+  inset: 0;
+
+  width: 28px;
+  height: 28px;
+
+  margin: 0;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   VISUAL CHECKBOX
+   ========================================================= */
+
+.checkbox-visual {
+  width: 24px;
+
+  height: 24px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 2px solid var(--border);
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: white;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* =========================================================
+   CHECKMARK
+   ========================================================= */
+
+.checkbox-icon {
+  width: 16px;
+
+  height: 16px;
+
+  opacity: 0;
+
+  transform: scale(0.7);
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* =========================================================
+   CHECKED CHECKBOX
+   ========================================================= */
+
+.checkbox-container input[type="checkbox"]:checked+.checkbox-visual {
+  background: var(--accent);
+
+  border-color: var(--accent);
+}
+
+
+.checkbox-container input[type="checkbox"]:checked+.checkbox-visual .checkbox-icon {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+   ========================================================= */
+
+.checkbox-container input[type="checkbox"]:focus-visible+.checkbox-visual {
+  outline: 3px solid var(--accent-border);
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.card-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+.card-title {
+  color: var(--text-h);
+
+  font-size: 21px;
+
+  font-weight: 600;
+
+  margin: 0 0 7px;
+}
+
+
+.card-description {
+  color: var(--text);
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+   ========================================================= */
+
+.modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 10000;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  backdrop-filter: blur(4px);
+
+  -webkit-backdrop-filter: blur(4px);
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal-content {
+  width: 100%;
+
+  max-width: 460px;
+
+  box-sizing: border-box;
+
+  padding: 35px 30px 30px;
+
+  text-align: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  background: var(--bg);
+
+  color: var(--text-h);
+
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0 25px 50px -12px;
+
+  animation: modalEnter 0.2s ease-out;
+}
+
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+
+    transform: scale(0.94) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+/* =========================================================
+   MODAL CHECKMARK
+   ========================================================= */
+
+.checkmark-container {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 18px;
+}
+
+
+.checkmark-circle {
+  width: 64px;
+
+  height: 64px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--accent-bg);
+
+  border: 2px solid var(--accent-border);
+}
+
+
+.checkmark-svg {
+  width: 34px;
+
+  height: 34px;
+
+  fill: none;
+
+  stroke: var(--accent);
+
+  stroke-width: 2.5;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   MODAL TEXT
+   ========================================================= */
+
+.modal-step-info {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--accent);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+
+.modal-title {
+  margin: 0 0 12px;
+
+  color: var(--text-h);
+
+  font-size: 26px;
+
+  font-weight: 600;
+}
+
+
+.modal-desc {
+  margin: 0 auto 25px;
+
+  color: var(--text);
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   OK BUTTON
+   ========================================================= */
+
+.modal-btn {
+  width: 100%;
+
+  min-height: 48px;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  background: var(--accent);
+
+  color: white;
+
+  font-family: var(--sans);
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+.modal-btn:hover {
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+}
+
+
+.modal-btn:active {
+  transform: translateY(0);
+}
+
+
+.modal-btn:focus-visible {
+  outline: 3px solid var(--accent-border);
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 1024px) {
+
+  :root {
+    font-size: 16px;
+  }
+
+
+  h1 {
+    font-size: 36px;
+
+    margin: 20px 0;
+  }
+
+
+  h2 {
+    font-size: 20px;
+  }
+
+
+  .container {
+    padding: 25px 20px 45px;
+  }
+
+
+  .instructions {
+    padding: 16px;
+
+    margin-bottom: 22px;
+  }
+
+
+  .checklist {
+    gap: 12px;
+  }
+
+
+  .checkbox-card {
+    min-height: 90px;
+
+    padding: 18px;
+
+    gap: 15px;
+  }
+
+
+  .card-title {
+    font-size: 18px;
+  }
+
+
+  .card-description {
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 20px 14px 35px;
+  }
+
+
+  .header {
+    margin-bottom: 25px;
+  }
+
+
+  .header h1 {
+    font-size: 32px;
+
+    letter-spacing: -0.8px;
+  }
+
+
+  .header p {
+    font-size: 14px;
+  }
+
+
+  .instructions {
+    gap: 10px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+  }
+
+
+  .instructions-icon {
+    font-size: 20px;
+  }
+
+
+  .instructions-text {
+    font-size: 13px;
+  }
+
+
+  .checkbox-card {
+    padding: 16px;
+
+    min-height: 82px;
+
+    gap: 13px;
+
+    border-radius: 11px;
+  }
+
+
+  .checkbox-container {
+    width: 26px;
+
+    height: 26px;
+  }
+
+
+  .checkbox-container input[type="checkbox"] {
+    width: 26px;
+
+    height: 26px;
+  }
+
+
+  .checkbox-visual {
+    width: 23px;
+
+    height: 23px;
+  }
+
+
+  .card-title {
+    font-size: 17px;
+
+    margin-bottom: 5px;
+  }
+
+
+  .card-description {
+    font-size: 13px;
+
+    line-height: 1.4;
+  }
+
+
+  .modal-content {
+    max-width: calc(100vw - 28px);
+
+    padding: 28px 20px 22px;
+
+    border-radius: 15px;
+  }
+
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+
+  .modal-desc {
+    font-size: 14px;
+  }
+}
