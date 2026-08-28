@@ -31,7 +31,6 @@ const initialPilgrims: Pilgrim[] = Array.from({ length: 6 }, () =>
 );
 
 const initialGeneralDetails: GeneralDetails = {
-  gothram: "",
   email: "",
   city: "",
   state: "",
