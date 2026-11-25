@@ -107,7 +107,7 @@ function ChecklistPage({ reviewMode }: { reviewMode: boolean }) {
   return (
     <main className="container checklist-page">
       <header className="header">
-        <div className="page-navigation"><button type="button" className="page-navigation-button" onClick={() => { window.location.hash = "#booking-details"; }}>{reviewMode ? "Special Darshan 300" : "Srivari Seva"}</button></div>
+        <div className="page-navigation"><button type="button" className="page-navigation-button" onClick={() => { window.location.hash = "#booking-details"; }}>{reviewMode ? "Special Darshan 300" : "Special Darshan 300"}</button></div>
         <h1>{reviewMode ? "Confirmed Checklist Details" : "Srivari Seva"}</h1>
         <p>{reviewMode ? "Review all 15 completed checkbox details before confirming." : "Complete each step below. When all 15 are checked, continue to review them."}</p>
       </header>
