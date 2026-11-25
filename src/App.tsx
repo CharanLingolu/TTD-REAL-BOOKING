@@ -36,7 +36,8 @@ function App() {
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
-  return page === "#checkbox-filling" ? <ChecklistPage /> : <BookingDetailsPage />;
+  if (page === "#checkbox-filling" || page === "#confirmation-review") return <ChecklistPage reviewMode={page === "#confirmation-review"} />;
+  return <BookingDetailsPage />;
 }
 
 
@@ -55,8 +56,7 @@ function BookingDetailsPage() {
     <div className="ttd-page">
       <header className="ttd-header">
         <button type="button" className="back-button" aria-label="Go back" onClick={() => { window.location.hash = "#checkbox-filling"; }}><span aria-hidden="true">←</span></button>
-        <h1>Special Darshan ₹300</h1>
-        <button type="button" className="page-switch-button" onClick={() => { window.location.hash = "#checkbox-filling"; }}>Checkbox Filling</button>
+        <h1>Srivari Seva</h1>
       </header>
       <main className="ttd-content">
         <form className="booking-form" onSubmit={handleContinue}>
@@ -87,7 +87,7 @@ function BookingDetailsPage() {
 }
 
 
-function ChecklistPage() {
+function ChecklistPage({ reviewMode }: { reviewMode: boolean }) {
   const [checkedItems, setCheckedItems] = useState<{ [key: number]: boolean }>({});
   const [activeModalItem, setActiveModalItem] = useState<ChecklistItem | null>(null);
   const [bookingSuccessful, setBookingSuccessful] = useState(false);
@@ -103,31 +103,35 @@ function ChecklistPage() {
   const closeModal = () => setActiveModalItem(null);
   const allComplete = ITEMS.every((item) => checkedItems[item.id]);
   const checkedCount = ITEMS.filter((item) => checkedItems[item.id]).length;
+  const completedItems = ITEMS.filter((item) => checkedItems[item.id]);
   return (
     <main className="container checklist-page">
       <header className="header">
-        <div className="page-navigation"><button type="button" className="page-navigation-button" onClick={() => { window.location.hash = "#booking-details"; }}>Booking Details</button></div>
-        <h1>Special Darshan ₹300</h1>
-        <p>Complete each verification step below to finish your booking practice.</p>
+        <div className="page-navigation"><button type="button" className="page-navigation-button" onClick={() => { window.location.hash = "#booking-details"; }}>{reviewMode ? "Special Darshan 300" : "Srivari Seva"}</button></div>
+        <h1>{reviewMode ? "Confirmed Checklist Details" : "Special Darshan ₹300"}</h1>
+        <p>{reviewMode ? "Review all 15 completed checkbox details before confirming." : "Complete each step below. When all 15 are checked, continue to review them."}</p>
       </header>
-      <section className="instructions"><span className="instructions-icon">💡</span><div className="instructions-text"><strong>Instructions:</strong> Select each configuration item to toggle its completion status. Checking a step displays a centered confirmation popup. Close it using <strong>OK</strong> or <strong>Esc</strong>.</div></section>
-      <div className="progress-line"><span>{checkedCount} of {ITEMS.length} steps completed</span><div className="progress-track"><div className="progress-fill" style={{ width: `${(checkedCount / ITEMS.length) * 100}%` }} /></div></div>
-      <section className="checklist" aria-label="System configuration steps">
-        {ITEMS.map((item) => {
-          const isChecked = !!checkedItems[item.id];
-          return <article key={item.id} className={`checkbox-card ${isChecked ? "checked" : ""}`}>
-            <label className="checkbox-container"><input type="checkbox" checked={isChecked} onChange={(e) => handleCheckboxChange(item, e.target.checked)} aria-label={`Mark "${item.title}" as done`} /><span className="checkbox-visual" aria-hidden="true"><svg className="checkbox-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span></label>
-            <div className="card-content"><h2 className="card-title">{item.title}</h2><p className="card-description">{item.description}</p></div>
-            {isChecked && <span className="card-status">Completed</span>}
-          </article>;
-        })}
-      </section>
-      <section className="checked-details" aria-label="Completed step details"><h2>Completed Checklist Details</h2><p className="review-intro">Review the information for each completed step below.</p>
-        {ITEMS.filter((item) => checkedItems[item.id]).map((item) => <article className="detail-card" key={item.id}><div className="detail-card-top"><span className="detail-step">Step {item.id}</span><span className="detail-completed">✓ Completed</span></div><h3>{item.title}</h3><p>{item.description}</p><div className="detail-info"><strong>Completion information</strong><p>{item.detail}</p></div></article>)}
-        {checkedCount === 0 && <div className="empty-review">Completed step details will appear here as you check each item.</div>}
-      </section>
-      <div className="confirm-area"><button className="confirm-button" type="button" disabled={!allComplete} onClick={() => setBookingSuccessful(true)}>Confirm</button><p>{allComplete ? "All steps completed. You can confirm now." : `Complete all 15 steps to enable confirmation (${checkedCount}/15).`}</p></div>
-      {activeModalItem && <div className="modal-overlay" onClick={closeModal}><div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="modal-title"><div className="checkmark-container"><div className="checkmark-circle"><svg className="checkmark-svg" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" /></svg></div></div><span className="modal-step-info">Step {activeModalItem.id} Activated</span><h2 id="modal-title" className="modal-title">{activeModalItem.title}</h2><p className="modal-desc">{activeModalItem.detail}</p><button type="button" className="modal-btn" onClick={closeModal} autoFocus>OK</button></div></div>}
+      {!reviewMode && <>
+        <section className="instructions"><span className="instructions-icon">💡</span><div className="instructions-text"><strong>Instructions:</strong> Check each item to mark it complete. Each checked item shows a confirmation popup. Close it using <strong>OK</strong> or <strong>Esc</strong>.</div></section>
+        <div className="progress-line"><span>{checkedCount} of {ITEMS.length} steps completed</span><div className="progress-track"><div className="progress-fill" style={{ width: `${(checkedCount / ITEMS.length) * 100}%` }} /></div></div>
+        <section className="checklist" aria-label="Checklist steps">
+          {ITEMS.map((item) => {
+            const isChecked = !!checkedItems[item.id];
+            return <article key={item.id} className={`checkbox-card ${isChecked ? "checked" : ""}`}>
+              <label className="checkbox-container"><input type="checkbox" checked={isChecked} onChange={(e) => handleCheckboxChange(item, e.target.checked)} aria-label={`Mark ${item.title} complete`} /><span className="checkbox-visual" aria-hidden="true"><svg className="checkbox-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg></span></label>
+              <div className="card-content"><h2 className="card-title">{item.title}</h2><p className="card-description">{item.description}</p></div>
+              {isChecked && <span className="card-status">Completed</span>}
+            </article>;
+          })}
+        </section>
+        <div className="checklist-actions"><button type="button" className="continue-button" disabled={!allComplete} onClick={() => { window.location.hash = "#confirmation-review"; }}>Continue</button></div>
+      </>}
+      {reviewMode && <section className="checked-details" aria-label="Completed checklist review">
+        <div className="review-count">{checkedCount} / {ITEMS.length} completed</div>
+        {completedItems.map((item) => <article className="detail-card" key={item.id}><div className="detail-card-top"><span className="detail-step">Step {item.id}</span><span className="detail-completed">✓ Confirmed</span></div><h3>{item.title}</h3><p>{item.description}</p><div className="detail-info"><strong>Completion details</strong><p>{item.detail}</p></div></article>)}
+        <div className="checklist-actions review-actions"><button type="button" className="confirm-button" disabled={!allComplete} onClick={() => setBookingSuccessful(true)}>Confirm</button></div>
+      </section>}
+      {activeModalItem && !reviewMode && <div className="modal-overlay" onClick={closeModal}><div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="modal-title"><div className="checkmark-container"><div className="checkmark-circle"><svg className="checkmark-svg" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" /></svg></div></div><span className="modal-step-info">Step {activeModalItem.id} Activated</span><h2 id="modal-title" className="modal-title">{activeModalItem.title}</h2><p className="modal-desc">{activeModalItem.detail}</p><button type="button" className="modal-btn" onClick={closeModal} autoFocus>OK</button></div></div>}
       {bookingSuccessful && <div className="modal-overlay" onClick={() => setBookingSuccessful(false)}><div className="modal-content success-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="success-title"><div className="checkmark-container"><div className="checkmark-circle"><svg className="checkmark-svg" viewBox="0 0 24 24"><path d="M20 6L9 17L4 12" /></svg></div></div><span className="modal-step-info">All 15 steps confirmed</span><h2 id="success-title" className="modal-title">Booking Successful!</h2><p className="modal-desc">Your Special Darshan ₹300 practice booking has been completed successfully.</p><button type="button" className="modal-btn" onClick={() => setBookingSuccessful(false)}>Done</button></div></div>}
     </main>
   );
