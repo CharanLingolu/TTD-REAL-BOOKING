@@ -56,7 +56,7 @@ function BookingDetailsPage() {
     <div className="ttd-page">
       <header className="ttd-header">
         <button type="button" className="back-button" aria-label="Go back" onClick={() => { window.location.hash = "#checkbox-filling"; }}><span aria-hidden="true">←</span></button>
-        <h1>Srivari Seva</h1>
+        <h1>Special Darshan 300</h1>
       </header>
       <main className="ttd-content">
         <form className="booking-form" onSubmit={handleContinue}>
@@ -108,7 +108,7 @@ function ChecklistPage({ reviewMode }: { reviewMode: boolean }) {
     <main className="container checklist-page">
       <header className="header">
         <div className="page-navigation"><button type="button" className="page-navigation-button" onClick={() => { window.location.hash = "#booking-details"; }}>{reviewMode ? "Special Darshan 300" : "Srivari Seva"}</button></div>
-        <h1>{reviewMode ? "Confirmed Checklist Details" : "Special Darshan ₹300"}</h1>
+        <h1>{reviewMode ? "Confirmed Checklist Details" : "Srivari Seva"}</h1>
         <p>{reviewMode ? "Review all 15 completed checkbox details before confirming." : "Complete each step below. When all 15 are checked, continue to review them."}</p>
       </header>
       {!reviewMode && <>
