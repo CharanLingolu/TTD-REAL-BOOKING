@@ -100,7 +100,7 @@ export default function TtdBookingPracticePage() {
           <span aria-hidden="true">←</span>
         </button>
 
-        <h1>Angapradakshinam</h1>
+        <h1>Special Entry Darshan 300</h1>
 
         <button
           type="button"
